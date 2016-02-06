@@ -40,6 +40,11 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 Describe any challenges encountered while building the app.
 
+## Attribution
+
+* movie star by Studio Fibonacci from the Noun Project
+* tickets by Arthur Lacôte from the Noun Project
+
 ## License
 
     Copyright [yyyy] [name of copyright owner]
