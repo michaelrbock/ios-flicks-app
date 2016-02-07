@@ -32,25 +32,45 @@ class DetailViewController: UIViewController {
         overviewLabel.text = overview
         overviewLabel.sizeToFit()
 
-        let baseURL = "https://image.tmdb.org/t/p/w500"
+        fetchAndSetPosterImages()
+    }
+
+    func fetchAndSetPosterImages() {
+        let smallBaseURL = "https://image.tmdb.org/t/p/w342"
         if let posterPath = movie["poster_path"] as? String {
-            let imageURL = NSURL(string: baseURL + posterPath)
-            let imageURLRequest = NSURLRequest(URL: imageURL!)
+            let smallImageURL = NSURL(string: smallBaseURL + posterPath)
+            let smallImageURLRequest = NSURLRequest(URL: smallImageURL!)
 
             posterImageView.setImageWithURLRequest(
-                imageURLRequest,
+                smallImageURLRequest,
                 placeholderImage: nil,
-                success: { (imageURLRequest, imageResponse, image) -> Void in
-                    if imageResponse != nil {
-                        self.posterImageView.alpha = 0.0
-                        self.posterImageView.image = image
-                        UIView.animateWithDuration(0.3, animations: { () -> Void in
-                            self.posterImageView.alpha = 1.0
-                        })
-                    } else {
-                        self.posterImageView.image = image
-                    }
+                success: { (smallImageURLRequest, smallImageResponse, smallImage) -> Void in
+                    self.posterImageView.alpha = 0.0
+                    self.posterImageView.image = smallImage
+
+                    UIView.animateWithDuration(0.2, animations: { () -> Void in
+                        self.posterImageView.alpha = 1.0
+                        }, completion: { (success) -> Void in
+                            self.fetchAndSetLargerImage()
+                    })
                 }, failure: { (imageURLRequest, imageResponse, error) -> Void in
+                    // Do something here
+            })
+        }
+    }
+
+    func fetchAndSetLargerImage() {
+        let largeBaseURL = "https://image.tmdb.org/t/p/original"
+        if let posterPath = movie["poster_path"] as? String {
+            let largeImageURL = NSURL(string: largeBaseURL + posterPath)
+            let largeImageURLRequest = NSURLRequest(URL: largeImageURL!)
+            self.posterImageView.setImageWithURLRequest(
+                largeImageURLRequest,
+                placeholderImage: nil,
+                success: { (largeImageURLRequest, largeImageResponse, largeImage) -> Void in
+                    self.posterImageView.image = largeImage
+                },
+                failure: { (imageURLRequest, imageResponse, error) -> Void in
                     // Do something here
             })
         }
