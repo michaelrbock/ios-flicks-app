@@ -110,7 +110,13 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         cell.titleLabel.text = title
         cell.overviewLabel.text = overview
 
+        cell.selectionStyle = .None
+
         return cell
+    }
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.cellForRowAtIndexPath(indexPath)?.selectionStyle = .None
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
