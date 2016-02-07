@@ -62,7 +62,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let baseURL = "https://image.tmdb.org/t/p/w500"
         if let posterPath = movie["poster_path"] as? String {
             let imageURL = NSURL(string: baseURL + posterPath)
-            cell.posterView.setImageWithURL(imageURL!)
+            cell.posterView.setImageWithURL(imageURL!, placeholderImage: UIImage(named: "placeholder"))
         }
 
         cell.titleLabel.text = title
