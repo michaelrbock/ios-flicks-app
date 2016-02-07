@@ -15,6 +15,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var networkErrorView: UIView!
     @IBOutlet weak var tableView: UITableView!
 
+    var refreshControl: UIRefreshControl!
+
     var movies: [NSDictionary]?
     var endpoint: String!
 
@@ -26,6 +28,14 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.dataSource = self
         tableView.delegate = self
 
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "fetchMovieData", forControlEvents: UIControlEvents.ValueChanged)
+        tableView.insertSubview(refreshControl, atIndex: 0)
+
+        fetchMovieData()
+    }
+
+    func fetchMovieData() {
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
         let url = NSURL(string: "http://api.themoviedb.org/3/movie/\(endpoint)?api_key=\(apiKey)")
         let request = NSURLRequest(URL: url!)
@@ -43,15 +53,17 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
                 if error != nil {
                     self.networkErrorView.hidden = false
+                    self.refreshControl.endRefreshing()
                 }
 
                 if let data = dataOrNil {
                     self.networkErrorView.hidden = true
+
                     if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary {
                         self.movies = responseDictionary["results"] as? [NSDictionary]
                         self.tableView.reloadData()
+                        self.refreshControl.endRefreshing()
                     }
-
                 }
         })
         task.resume()
