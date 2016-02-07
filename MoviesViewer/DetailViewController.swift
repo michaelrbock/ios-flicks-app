@@ -28,6 +28,7 @@ class DetailViewController: UIViewController {
 
         let title = movie["title"] as! String
         titleLabel.text = title
+        navigationItem.title = title
 
         let stars = movie["vote_average"] as! Double
         starLabel.text = "\(stars)/10 ⭐"
