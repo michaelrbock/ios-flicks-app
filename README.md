@@ -1,6 +1,6 @@
 # Project 1 - Flicks for iOS
 
-Flicks for iOS is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#) made for the week 1 CodePath assignment.
+Flicks for iOS is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#) made for CodePath's Week 1 assignment.
 
 Time spent: **8** hours spent in total
 
@@ -32,13 +32,9 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-![Walkthrough](flicks-gif.gif)
+![Walkthrough](flicks.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
-
-## Notes
-
-Describe any challenges encountered while building the app.
 
 ## Attribution
 
