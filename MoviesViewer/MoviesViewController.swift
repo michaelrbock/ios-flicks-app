@@ -12,6 +12,7 @@ import UIKit
 
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var networkErrorView: UIView!
     @IBOutlet weak var tableView: UITableView!
 
     var movies: [NSDictionary]?
@@ -19,6 +20,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        networkErrorView.hidden = true
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -36,9 +39,15 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
         let task: NSURLSessionDataTask = session.dataTaskWithRequest(request,
             completionHandler: { (dataOrNil, response, error) in
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+
+                if error != nil {
+                    self.networkErrorView.hidden = false
+                }
+
                 if let data = dataOrNil {
+                    self.networkErrorView.hidden = true
                     if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary {
-                        MBProgressHUD.hideHUDForView(self.view, animated: true)
                         self.movies = responseDictionary["results"] as? [NSDictionary]
                         self.tableView.reloadData()
                     }
