@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieCell: UITableViewCell {
+class MovieTableCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!

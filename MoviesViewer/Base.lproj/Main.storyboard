@@ -23,7 +23,7 @@
                                     <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                 </searchBar>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="123" id="L4v-xN-W3Z" customClass="MovieCell" customModule="MoviesViewer" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MovieTableCell" rowHeight="123" id="L4v-xN-W3Z" customClass="MovieTableCell" customModule="MoviesViewer" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="136" width="320" height="123"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="L4v-xN-W3Z" id="yfF-XN-5GA">
@@ -73,11 +73,49 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="atx-Ul-Bgo">
+                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kD0-2T-avz">
+                                    <size key="itemSize" width="155" height="222"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCollectionCell" id="FAl-nA-LSI" customClass="MovieCollectionCell" customModule="MoviesViewer" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="155" height="222"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="155" height="222"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="2Um-gP-CRO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="155" height="222"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <outlet property="posterView" destination="2Um-gP-CRO" id="IDo-9W-esq"/>
+                                            <segue destination="f9z-P8-DJX" kind="push" id="u4f-5S-opc"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Movies" id="eDL-Uu-Vbl"/>
+                    <navigationItem key="navigationItem" title="Movies" id="eDL-Uu-Vbl">
+                        <barButtonItem key="leftBarButtonItem" title="Grid" id="c1t-7V-Xd4">
+                            <connections>
+                                <action selector="switchView:" destination="BYZ-38-t0r" id="qRU-vX-RUP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="collectionView" destination="atx-Ul-Bgo" id="BdP-hN-eVv"/>
                         <outlet property="networkErrorView" destination="796-Y8-B0W" id="A8V-eU-nIZ"/>
                         <outlet property="searchBar" destination="ymc-0S-obo" id="jhK-Jn-FOm"/>
                         <outlet property="tableView" destination="N8a-0e-UTr" id="N6P-lR-Ixg"/>
@@ -85,7 +123,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="767" y="368"/>
+            <point key="canvasLocation" x="769" y="368"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="iTi-Ko-yX3">
@@ -170,4 +208,7 @@
             <point key="canvasLocation" x="408" y="368"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="u4f-5S-opc"/>
+    </inferredMetricsTieBreakers>
 </document>
