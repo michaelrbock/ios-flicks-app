@@ -26,7 +26,7 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [X] Includes vote average as stars on details page.
 
 ## Video Walkthrough
 

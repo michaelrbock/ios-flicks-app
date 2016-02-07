@@ -14,6 +14,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var starLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
 
     var movie: NSDictionary!
@@ -27,6 +28,9 @@ class DetailViewController: UIViewController {
 
         let title = movie["title"] as! String
         titleLabel.text = title
+
+        let stars = movie["vote_average"] as! Double
+        starLabel.text = "\(stars)/10 ⭐"
 
         let overview = movie["overview"] as! String
         overviewLabel.text = overview
